@@ -1,0 +1,92 @@
+// COLOR VARIABLES
+$color-primary: #c69963;
+$color-primary-dark: #B28451;
+
+$color-secondary: #101d2c;
+
+$color-grey-light-1: #f9f7f6;
+$color-grey-light-2: #aaa;
+
+$color-grey-dark-1: #54483A;
+$color-grey-dark-2: #6D5D4B;
+
+// FONT VARIABLES
+$font-primary: 'Nunito', sans-serif;
+$font-display: 'Josefin Sans', sans-serif;
+
+
+// Media Query Manager
+
+@mixin respond($bp) {
+    @if $bp == largest { 
+        @media only screen and (max-width:75em) { @content }; //1200px
+    }
+
+    @if $bp == large { 
+        @media only screen and (max-width:62.5em) { @content }; //1000px
+    }
+
+    @if $bp == medium { 
+        @media only screen and (max-width:50em) { @content }; // 800px
+    }
+
+    @if $bp == small { 
+        @media only screen and (max-width:37.5em) { @content }; // 600px
+    }
+}
+
+
+
+
+
+
+
+
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: inherit;
+    // outline: inherit;
+
+
+
+}
+
+html {
+    font-size: 62.5%;
+    box-sizing: border-box;
+
+    @include respond(largest) {
+        font-size: 50%;       // 1rem = 8px
+    }
+
+    @include respond(small) {
+        font-size: 45%;       // 1rem = 6.4px
+    }
+}
+
+body {
+    font-family: $font-display;
+
+    color: $color-grey-dark-2;
+    font-weight: 300;
+    line-height: 1.6;
+}
+
+.container {
+    display: grid;
+    grid-template-rows: 80vh min-content 40vw  repeat(3,min-content);
+    grid-template-columns: [sidebar-start]8rem [sidebar-end full-start] minmax(6rem,1fr) [center-start]repeat(8, [col-start] minmax(min-content,14rem)[col-end])[center-end] minmax(6rem,1fr) [full-end];
+
+    @include respond(large) {
+        grid-template-rows: 6rem 80vh min-content 40vw  repeat(3,min-content);
+
+        grid-template-columns: [full-start] minmax(6rem,1fr) [center-start]repeat(8, [col-start] minmax(min-content,14rem)[col-end])[center-end] minmax(6rem,1fr) [full-end];
+    }
+    
+    @include respond(medium) {
+        grid-template-rows: 6rem calc(100vh - 6rem);
+    }
+}
